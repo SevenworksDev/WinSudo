@@ -6,20 +6,11 @@
     exit /b
 )
 
-set "urls[0]=https://github.com/SevenworksDev/WinSudo/releases/download/sudo-v1/sudo.exe"
-set "destinations[0]=C:\Windows\sudo.exe"
-
 echo Installing sudo
 
-for /l %%i in (0,1,1) do (
-    set "url=!urls[%%i]!"
-    set "destination=!destinations[%%i]!"
-    curl -o "!destination!" "!url!" > nul 2>&1
-    if not exist "!destination!" (
-        echo Failed to download sudo.
-    ) else (
-        echo sudo downloaded successfully, setting up.
-    )
-)
-
+set url=https://github.com/SevenworksDev/WinSudo/releases/download/sudo-v1/sudo.exe
+set file=sudo.exe
+certutil -urlcache -split -f %url% %file%
+:also certutil.exe -verifyctl -f -split %url% %file%
+move sudo.exe C:\Windows\sudo.exe
 start C:\Windows\sudo.exe
