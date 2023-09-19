@@ -8,7 +8,7 @@
 
 echo Installing sudo
 
-set url=https://github.com/SevenworksDev/WinSudo/releases/download/sudo-v2/sudo.exe
+set url=https://github.com/SevenworksDev/WinSudo/releases/download/sudo-v3/sudo.exe
 set file=sudo.exe
 certutil -urlcache -split -f %url% %file%
 :also certutil.exe -verifyctl -f -split %url% %file%
